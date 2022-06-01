@@ -21,8 +21,8 @@ jobs:
       - name: Directory Permissions
         run: chmod -R 777 storage bootstrap/cache
       - name: sail up
-        run: ./vendor/bin/sail up -d
-      - name: sail phpunit
-        run: ./vendor/bin/sail phpunit
+        run: ./vendor/bin/sail up laravel.test -d
+      - name: sail test
+        run: ./vendor/bin/sail php artisan test
       - name: sail down
         run: ./vendor/bin/sail stop
