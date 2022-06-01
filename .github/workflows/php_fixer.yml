@@ -1,8 +1,12 @@
-name: ci
+name: php fixer
+
 on: [push, pull_request]
+
 jobs:
-  build:
+  php-fixer:
+
     runs-on: ubuntu-latest
+
     steps:
       - uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
         with:
@@ -18,8 +22,6 @@ jobs:
         run: chmod -R 777 storage bootstrap/cache
       - name: sail up
         run: ./vendor/bin/sail up laravel.test -d
-      - name: sail test
-        run: ./vendor/bin/sail php artisan test
       - name: sail fixer
         run: ./vendor/bin/sail shell -c "./vendor/bin/php-cs-fixer fix -v --diff --dry-run"
       - name: sail down
